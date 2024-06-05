@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import io.FileUtil;
+
 public class GestorBD {
 	
 	private final static String DBURL = "jdbc:hsqldb:file:data/basedatos;shutdown=true";
@@ -12,24 +14,23 @@ public class GestorBD {
 	private final static String DBUSER = "SA";
 	private final static String DBPW = "";
 	
+	public static void generarBaseDeDatosEnBlanco() {
+		String SQL = FileUtil.cargarTextoDeFichero("scripts/esquema.sql");
+		ejecutarSQLUpdate(SQL);
+		System.out.println("Operación Finalizada");
+	}
+	
 	public static void ejecutarSQLUpdate(String sql) {
 		Connection connection = null;
         Statement statement = null;
         try {
-            // Cargar el controlador JDBC de HSQLDB
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
-
-            // Conectarse a la base de datos
             connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
             statement = connection.createStatement();
-            
-            // Ejecutar sentencia
             statement.executeUpdate(sql);
-            
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
-            // Cerrar recursos
             if (statement != null) {
                 try {
                     statement.close();

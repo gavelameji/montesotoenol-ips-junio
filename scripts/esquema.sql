@@ -25,16 +25,13 @@ CREATE TABLE almacen(
     CONSTRAINT pk_almacen PRIMARY KEY (id_almacen)
 );
 
--- Paquete
-DROP TABLE IF EXISTS paquete;
-CREATE TABLE paquete(
-    id_paquete VARCHAR(8),
-    descripcion_paquete VARCHAR(30) NOT NULL,
-    a_domicilio_paquete BOOLEAN,
-    direccion_destino_paquete VARCHAR(30) NOT NULL,
-    id_ruta VARCHAR(8),
-    CONSTRAINT pk_paquete PRIMARY KEY (id_paquete)
-    CONSTRAINT fk_paquete_ruta FOREIGN KEY (id_ruta) REFERENCES ruta (id_ruta)
+-- Vehiculo
+DROP TABLE IF EXISTS vehiculo;
+CREATE TABLE vehiculo(
+    id_vehiculo VARCHAR(8),
+    tipo_vehiculo VARCHAR(10),
+    capacidad_vehiculo INT,
+    CONSTRAINT pk_vehiculo PRIMARY KEY (id_vehiculo)
 );
 
 -- Ruta
@@ -51,11 +48,14 @@ CREATE TABLE ruta(
     CONSTRAINT fk_ruta_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo (id_vehiculo)
 );
 
--- Vehiculo
-DROP TABLE IF EXISTS vehiculo;
-CREATE TABLE Vehiculo(
-    id_vechiculo VARCHAR(8),
-    tipo_vehiculo VARCHAR(10),
-    capacidad_vehiculo INT,
-    CONSTRAINT pk_vehiculo PRIMARY KEY (id_vehiculo)
+-- Paquete
+DROP TABLE IF EXISTS paquete;
+CREATE TABLE paquete(
+    id_paquete VARCHAR(8),
+    descripcion_paquete VARCHAR(30) NOT NULL,
+    a_domicilio_paquete BOOLEAN,
+    direccion_destino_paquete VARCHAR(30) NOT NULL,
+    id_ruta VARCHAR(8),
+    CONSTRAINT pk_paquete PRIMARY KEY (id_paquete),
+    CONSTRAINT fk_paquete_ruta FOREIGN KEY (id_ruta) REFERENCES ruta (id_ruta)
 );
