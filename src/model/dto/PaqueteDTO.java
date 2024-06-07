@@ -1,12 +1,13 @@
 package model.dto;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class PaqueteDTO {
 	
 	private String id;
 	private String descripcion;
-	private LocalDate fechaEmision;
+	private Date fechaEmision;
 	private String estado;
 	private String direccionOrigen;
 	private String direccionDestino;
@@ -15,10 +16,12 @@ public class PaqueteDTO {
 	private String dniCliente;
 	private String idRuta;
 	private String idOficina;
+	private String idLocalizador;
 	
+	private float peso;
+	private String precioFinal;
 	
-	
-	public PaqueteDTO(String id, String descripcion, LocalDate fechaEmision, String estado, String direccionOrigen,
+	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
 			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina) {
 		super();
 		this.id = id;
@@ -33,13 +36,35 @@ public class PaqueteDTO {
 		this.idOficina = idOficina;
 	}
 	
+	
+
+	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
+			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina,
+			String idLocalizador, float peso, String precioFinal) {
+		this.id = id;
+		this.descripcion = descripcion;
+		this.fechaEmision = fechaEmision;
+		this.estado = estado;
+		this.direccionOrigen = direccionOrigen;
+		this.direccionDestino = direccionDestino;
+		this.recogerADomicilio = recogerADomicilio;
+		this.dniCliente = dniCliente;
+		this.idRuta = idRuta;
+		this.idOficina = idOficina;
+		this.idLocalizador = idLocalizador;
+		this.peso = peso;
+		this.precioFinal = precioFinal;
+	}
+
+
+
 	public String getId() {
 		return id;
 	}
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public LocalDate getFechaEmision() {
+	public Date getFechaEmision() {
 		return fechaEmision;
 	}
 	public String getEstado() {
@@ -65,6 +90,20 @@ public class PaqueteDTO {
 	public String getIdOficina() {
 		return idOficina;
 	}
+
+	public String getIdLocalizador() {
+		return idLocalizador;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public String getPrecioFinal() {
+		return precioFinal;
+	}
+	
+	
 	
 	
 

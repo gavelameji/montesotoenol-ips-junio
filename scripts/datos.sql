@@ -6,6 +6,19 @@ VALUES ('1', 'José Luis Perales', 'C/ Moreno, Nº22, 1ºA', '123456789');
 INSERT INTO CLIENTE (dni_cliente, nombre_cliente, direccion_cliente, telefono_cliente)
 VALUES ('2', 'Marta Del Río', 'C/ Fernando Alonso, 33, 14ºA', '787378462');
 
+-- Oficinas
+INSERT INTO oficina (id_oficina, ciudad_oficina, direccion_oficina)
+VALUES ('1', 'Villablino', 'C/ Colominas, 45');
+
+INSERT INTO oficina (id_oficina, ciudad_oficina, direccion_oficina)
+VALUES ('2', 'Ponferrada', 'C/ Las Ollas, 12');
+
+INSERT INTO oficina (id_oficina, ciudad_oficina, direccion_oficina)
+VALUES ('3', 'Cerredo', 'C/ San Miguel, 87');
+
+INSERT INTO oficina (id_oficina, ciudad_oficina, direccion_oficina)
+VALUES ('4', 'Cangas Del Narcea', 'C/ Dos Amigos, 78');
+
 -- Paquetes
 
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 

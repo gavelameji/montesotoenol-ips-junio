@@ -10,8 +10,8 @@ DROP TABLE IF EXISTS cliente;
 -- Cliente
 CREATE TABLE cliente(
     dni_cliente VARCHAR(8),
-    nombre_cliente VARCHAR(30) NOT NULL,
-    direccion_cliente VARCHAR(30) NOT NULL,
+    nombre_cliente VARCHAR(100) NOT NULL,
+    direccion_cliente VARCHAR(100) NOT NULL,
     telefono_cliente VARCHAR(9),
     CONSTRAINT pk_cliente PRIMARY KEY (dni_cliente)
 );
@@ -19,8 +19,8 @@ CREATE TABLE cliente(
 -- Oficina
 CREATE TABLE oficina(
     id_oficina VARCHAR(8),
-    nombre_oficina VARCHAR(30) NOT NULL,
-    direccion_oficina VARCHAR(30) NOT NULL,
+    ciudad_oficina VARCHAR(30) NOT NULL,
+    direccion_oficina VARCHAR(100) NOT NULL,
     CONSTRAINT pk_oficina PRIMARY KEY (id_oficina)
 );
 
@@ -28,15 +28,15 @@ CREATE TABLE oficina(
 CREATE TABLE almacen(
     id_almacen VARCHAR(8),
     nombre_almacen VARCHAR(30) NOT NULL,
-    direccion_almacen VARCHAR(30) NOT NULL,
+    direccion_almacen VARCHAR(100) NOT NULL,
     CONSTRAINT pk_almacen PRIMARY KEY (id_almacen)
 );
 
 -- Ruta
 CREATE TABLE ruta(
     id_ruta VARCHAR(8),
-    origen_ruta VARCHAR(30),
-    destino_ruta VARCHAR(30),
+    origen_ruta VARCHAR(100),
+    destino_ruta VARCHAR(100),
     distancia FLOAT,
     duracion_estimada_ruta TIME,
     id_vehiculo VARCHAR(8),
@@ -46,12 +46,12 @@ CREATE TABLE ruta(
 
 -- Paquete
 CREATE TABLE paquete(
-    id_paquete VARCHAR(8),
+    id_paquete VARCHAR(36),
     descripcion_paquete VARCHAR(30) NOT NULL,
     recoger_a_domicilio BOOLEAN,
     fecha_emision_paquete DATE,
-    direccion_origen_paquete VARCHAR(30),
-    direccion_destino_paquete VARCHAR(30),
+    direccion_origen_paquete VARCHAR(100),
+    direccion_destino_paquete VARCHAR(100),
     estado_paquete VARCHAR(15),
     id_ruta VARCHAR(8),
     dni_cliente VARCHAR(8),

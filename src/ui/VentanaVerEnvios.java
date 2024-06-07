@@ -12,14 +12,10 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 
 public class VentanaVerEnvios extends JFrame {
@@ -35,7 +31,6 @@ public class VentanaVerEnvios extends JFrame {
 	private PaqueteController pc;
 	private String dni;
 	private JScrollPane panelTabla;
-	private JScrollPane scrollPane;
 
 	/**
 	 * Create the frame.

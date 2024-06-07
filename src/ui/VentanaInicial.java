@@ -89,6 +89,11 @@ public class VentanaInicial extends JFrame {
 	private JButton getBtnSolicitarEnvio() {
 		if (btnSolicitarEnvio == null) {
 			btnSolicitarEnvio = new JButton("Solicitar Envío");
+			btnSolicitarEnvio.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					mostrarVentanaSolicitarPedido();
+				}
+			});
 		}
 		return btnSolicitarEnvio;
 	}
@@ -116,6 +121,19 @@ public class VentanaInicial extends JFrame {
 			public void run() {
 				try {
 					VentanaVerEnvios frame = new VentanaVerEnvios();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void mostrarVentanaSolicitarPedido() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaSolicitarEnvio frame = new VentanaSolicitarEnvio();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
