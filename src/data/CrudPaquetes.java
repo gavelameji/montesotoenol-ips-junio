@@ -74,6 +74,38 @@ public class CrudPaquetes {
 	    return paquetes;
 	}
 	
+	public static PaqueteDTO obtenerPaquetePorLocalizador(String idLocalizador) {
+	    String sql = "SELECT * FROM paquete p, localizador l"
+	    		+ " WHERE l.id_localizador = ? AND p.id_paquete = l.id_paquete";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setString(1, idLocalizador);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            PaqueteDTO paquete = new PaqueteDTO(
+	                resultSet.getString("id_paquete"),
+	                resultSet.getString("descripcion_paquete"),
+	                resultSet.getDate("fecha_emision_paquete"),
+	                resultSet.getString("estado_paquete"),
+	                resultSet.getString("direccion_origen_paquete"),
+	                resultSet.getString("direccion_destino_paquete"),
+	                resultSet.getBoolean("recoger_a_domicilio"),
+	                resultSet.getString("dni_cliente"),
+	                resultSet.getString("id_ruta"),
+	                resultSet.getString("id_oficina")
+	            );
+	            return paquete;
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
 	public static void insertarPaquete(PaqueteDTO paquete) {
 		Connection connection = null;
         PreparedStatement statement = null;

@@ -88,7 +88,7 @@ public class VentanaInicial extends JFrame {
 	}
 	private JButton getBtnSolicitarEnvio() {
 		if (btnSolicitarEnvio == null) {
-			btnSolicitarEnvio = new JButton("Solicitar Envío");
+			btnSolicitarEnvio = new JButton("(HU1) Solicitar Envío");
 			btnSolicitarEnvio.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					mostrarVentanaSolicitarPedido();
@@ -99,7 +99,7 @@ public class VentanaInicial extends JFrame {
 	}
 	private JButton getBtnVerEnvios() {
 		if (btnVerEnvios == null) {
-			btnVerEnvios = new JButton("Ver Todos Mis Envíos");
+			btnVerEnvios = new JButton("(HU2) Ver Todos Mis Envíos");
 			btnVerEnvios.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					mostrarVentanaVerEnvios();
@@ -110,7 +110,12 @@ public class VentanaInicial extends JFrame {
 	}
 	private JButton getBtnSeguimiento() {
 		if (btnSeguimiento == null) {
-			btnSeguimiento = new JButton("Realizar Seguimiento De Envío");
+			btnSeguimiento = new JButton("(HU3, HU4) Realizar Seguimiento De Envío");
+			btnSeguimiento.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					mostrarVentanaSeguimiento();
+				}
+			});
 		}
 		return btnSeguimiento;
 	}
@@ -134,6 +139,19 @@ public class VentanaInicial extends JFrame {
 			public void run() {
 				try {
 					VentanaSolicitarEnvio frame = new VentanaSolicitarEnvio();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void mostrarVentanaSeguimiento() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaSeguimiento frame = new VentanaSeguimiento();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

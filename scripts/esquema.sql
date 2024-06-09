@@ -1,5 +1,5 @@
-
-
+DROP TABLE IF EXISTS ubicacion;
+DROP TABLE IF EXISTS localizador;
 DROP TABLE IF EXISTS paquete;
 DROP TABLE IF EXISTS ruta;
 DROP TABLE IF EXISTS almacen;
@@ -27,7 +27,7 @@ CREATE TABLE oficina(
 -- Almacen
 CREATE TABLE almacen(
     id_almacen VARCHAR(8),
-    nombre_almacen VARCHAR(30) NOT NULL,
+    ciudad_almacen VARCHAR(30) NOT NULL,
     direccion_almacen VARCHAR(100) NOT NULL,
     CONSTRAINT pk_almacen PRIMARY KEY (id_almacen)
 );
@@ -59,5 +59,25 @@ CREATE TABLE paquete(
     CONSTRAINT pk_paquete PRIMARY KEY (id_paquete),
     CONSTRAINT fk_paquete_ruta FOREIGN KEY (id_ruta) REFERENCES ruta (id_ruta),
     CONSTRAINT fk_paquete_cliente FOREIGN KEY (dni_cliente) REFERENCES cliente (dni_cliente),
-    CONSTRAINT fk_paquete_oficina FOREIGN KEY (id_oficina) REFERENCES oficina (id_oficina)
+    CONSTRAINT fk_paquete_oficina FOREIGN KEY (id_oficina) REFERENCES oficina (id_oficina),
 );
+
+--Localizador
+CREATE TABLE localizador (
+	id_localizador VARCHAR(36),
+	id_paquete VARCHAR(36),
+	CONSTRAINT pk_localizador PRIMARY KEY (id_localizador),
+	CONSTRAINT fk_localizador_paquete FOREIGN KEY (id_paquete) REFERENCES paquete (id_paquete)
+);
+
+-- Ubicacion
+CREATE TABLE ubicacion (
+	id_ubicacion VARCHAR(8),
+	es_actual BOOLEAN,
+	id_almacen VARCHAR(36),
+	id_localizador VARCHAR(36),
+	CONSTRAINT pk_ubicacion PRIMARY KEY (id_ubicacion),
+	CONSTRAINT fk_ubicacion_almacen FOREIGN KEY (id_almacen) REFERENCES almacen (id_almacen),
+	CONSTRAINT fk_ubicacion_localizador FOREIGN KEY (id_localizador) REFERENCES localizador (id_localizador)
+);
+

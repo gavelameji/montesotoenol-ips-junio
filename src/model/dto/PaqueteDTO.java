@@ -1,7 +1,6 @@
 package model.dto;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class PaqueteDTO {
 	
@@ -19,7 +18,7 @@ public class PaqueteDTO {
 	private String idLocalizador;
 	
 	private float peso;
-	private String precioFinal;
+	private float precioFinal;
 	
 	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
 			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina) {
@@ -40,7 +39,7 @@ public class PaqueteDTO {
 
 	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
 			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina,
-			String idLocalizador, float peso, String precioFinal) {
+			String idLocalizador, float peso, float precioFinal) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaEmision = fechaEmision;
@@ -99,7 +98,7 @@ public class PaqueteDTO {
 		return peso;
 	}
 
-	public String getPrecioFinal() {
+	public float getPrecioFinal() {
 		return precioFinal;
 	}
 	
