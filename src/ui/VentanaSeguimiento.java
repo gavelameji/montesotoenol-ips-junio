@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -157,7 +158,7 @@ public class VentanaSeguimiento extends JFrame {
 	}
 	private JList<UbicacionDTO> getListUbicaciones() {
 		if (listUbicaciones == null) {
-			listUbicaciones = new JList<UbicacionDTO>();
+	        listUbicaciones = new JList<UbicacionDTO>();
 			listUbicaciones.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		}
 		return listUbicaciones;
@@ -211,7 +212,28 @@ public class VentanaSeguimiento extends JFrame {
 		getTaInfo().setText(l.obtenerDetallesDePaquete());
 	}
 	
+	private void mostrarUbicaciones() {
+		
+	    List<UbicacionDTO> ubicaciones = ((Localizador)getCbLocalizadores().getSelectedItem()).getUbicaciones();
+
+	    DefaultListModel<UbicacionDTO> listModel = new DefaultListModel<>();
+	    for (UbicacionDTO u : ubicaciones) {
+	        listModel.addElement(u);
+	    }
+	    if (listUbicaciones == null) {
+	    	listUbicaciones = new JList<>(listModel);
+
+	    } else {
+	    	listUbicaciones.setModel(listModel);
+	    }
+	    listUbicaciones.revalidate();
+	    listUbicaciones.repaint();
+	    
+	    getTaActual().setText(((Localizador)getCbLocalizadores().getSelectedItem()).obtenerInfoUbicacionActual());
+	}
+	
 	private void mostrarSeguimiento() {
 		mostrarDetalles();
+		mostrarUbicaciones();
 	}
 }

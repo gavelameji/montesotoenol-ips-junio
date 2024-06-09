@@ -38,6 +38,13 @@ public class Localizador {
 		return paquete;
 	}
 	
+	private UbicacionDTO obtenerUbicacionActual() {
+		for(UbicacionDTO u: ubicaciones) {
+			if(u.isEsActual()) return u;
+		}
+		return null;
+	}
+	
 	public String obtenerDetallesDePaquete() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Descripción: ").append(paquete.getDescripcion()).append("\n");
@@ -46,6 +53,21 @@ public class Localizador {
 		sb.append("Dirección Destino: ").append(paquete.getDireccionOrigen()).append("\n");
 		sb.append("Peso: ").append(paquete.getPeso()).append(" Precio: ").append(paquete.getPrecioFinal());
 		return sb.toString();
+	}
+	
+	public String obtenerInfoUbicacionActual() {
+		UbicacionDTO ubicacionActual = obtenerUbicacionActual();
+		
+		if(ubicacionActual == null) {
+			return "No hay ubicación actual.";
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Su pedido se encuentra actualmente en:").append("\n");
+		sb.append("Almacen: ").append(ubicacionActual.getAlmacen().getDireccion()).append("\n");
+		sb.append("Ciudad: ").append(ubicacionActual.getAlmacen().getCiudad()).append("\n");
+		return sb.toString();
+		
 	}
 
 	@Override

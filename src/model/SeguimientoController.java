@@ -7,7 +7,7 @@ import data.CrudLocalizador;
 
 public class SeguimientoController {
 	
-	private String dni;
+	String dni;
 	private List<Localizador> localizadores;
 	
 	public SeguimientoController(String dni) {

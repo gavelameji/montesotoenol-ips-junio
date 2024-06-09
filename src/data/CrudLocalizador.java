@@ -45,7 +45,8 @@ public class CrudLocalizador {
 	}
 	
 	public static List<UbicacionDTO> obtenerUbicacionesPorLocalizador(String idLocalizador) {
-	    String sql = "SELECT * FROM ubicacion WHERE id_localizador = ?";
+	    String sql = "SELECT * FROM ubicacion WHERE id_localizador = ?"
+	    		+ "ORDER BY es_actual";
 	    
 	    List<UbicacionDTO> ubicaciones = new ArrayList<>();
 

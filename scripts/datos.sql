@@ -21,7 +21,7 @@ VALUES ('4', 'Cangas Del Narcea', 'C/ Dos Amigos, 78');
 
 -- Almacenes
 INSERT INTO almacen (id_almacen, ciudad_almacen, direccion_almacen)
-VALUES ('1', 'Pola De Allande', 'C/ Rey Pelayo, 18');
+VALUES ('1', 'Degaña', 'C/ Rey Pelayo, 18');
 
 INSERT INTO almacen (id_almacen, ciudad_almacen, direccion_almacen)
 VALUES ('2', 'San Antolín De Ibias', 'C/ Menendez, 34');
@@ -30,7 +30,7 @@ INSERT INTO almacen (id_almacen, ciudad_almacen, direccion_almacen)
 VALUES ('3', 'Mieres', 'C/ Carlos III, 27');
 
 INSERT INTO almacen (id_almacen, ciudad_almacen, direccion_almacen)
-VALUES ('4', 'Taramundi', 'C/ Las Caldas, 35');
+VALUES ('4', 'Posada De Rengos', 'C/ Las Caldas, 35');
 
 -- Paquetes
 
