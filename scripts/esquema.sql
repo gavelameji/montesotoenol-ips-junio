@@ -37,10 +37,7 @@ CREATE TABLE ruta(
     id_ruta VARCHAR(8),
     origen_ruta VARCHAR(100),
     destino_ruta VARCHAR(100),
-    distancia FLOAT,
-    duracion_estimada_ruta TIME,
-    id_vehiculo VARCHAR(8),
-    estado_ruta VARCHAR(20),
+    distancia_ruta FLOAT,
     CONSTRAINT pk_ruta PRIMARY KEY (id_ruta)
 );
 

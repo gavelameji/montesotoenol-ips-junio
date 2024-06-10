@@ -101,6 +101,15 @@ public class PaqueteDTO {
 	public float getPrecioFinal() {
 		return precioFinal;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return id + " - " + descripcion + " - " + fechaEmision;
+	}
+	
+	
 	
 	
 	

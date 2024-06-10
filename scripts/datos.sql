@@ -32,6 +32,20 @@ VALUES ('3', 'Mieres', 'C/ Carlos III, 27');
 INSERT INTO almacen (id_almacen, ciudad_almacen, direccion_almacen)
 VALUES ('4', 'Posada De Rengos', 'C/ Las Caldas, 35');
 
+-- Rutas
+
+INSERT INTO ruta (id_ruta, origen_ruta, destino_ruta, distancia_ruta)
+VALUES ('1', 'C/ Ruta Del Alba, Nº3, 1ºC', 'C/ Las Vegas, 2, 4ºDcha', 22.5);
+
+INSERT INTO ruta (id_ruta, origen_ruta, destino_ruta, distancia_ruta)
+VALUES ('2', 'C/ Los Arrudos, Nº3, 1ºD', 'C/ Salinas, 2, 4ºDcha', 45);
+
+INSERT INTO ruta (id_ruta, origen_ruta, destino_ruta, distancia_ruta)
+VALUES ('3', 'C/ Las Xanas, Nº6, 2ºA', 'C/ Macarrón, 2, 4ºDcha', 80.5);
+
+INSERT INTO ruta (id_ruta, origen_ruta, destino_ruta, distancia_ruta)
+VALUES ('4', 'C/ San Cosme, Nº4, 5ºA', 'C/ Villaranda, 2, 4ºDcha', 10);
+
 -- Paquetes
 
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
@@ -67,36 +81,36 @@ INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete,
 					 direccion_origen_paquete, direccion_destino_paquete,
 					 dni_cliente, id_oficina)
 VALUES ('4', 'paquete4', '2024-06-02', 
-		true, 'en ruta', NULL,
+		true, 'en ruta', '1',
 		'C/ Ruta Del Alba, Nº3, 1ºC', 'C/ Las Vegas, 2, 4ºDcha',
-		'1', NULL);
+		'1', '1');
 		
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
 					 recoger_a_domicilio, estado_paquete, id_ruta,
 					 direccion_origen_paquete, direccion_destino_paquete,
 					 dni_cliente, id_oficina)
 VALUES ('5', 'paquete5', '2024-06-01', 
-		true, 'en ruta', NULL,
+		true, 'en ruta', '2',
 		'C/ Los Arrudos, Nº3, 1ºD', 'C/ Salinas, 2, 4ºDcha',
-		'1', NULL);
+		'1', '1');
 		
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
 					 recoger_a_domicilio, estado_paquete, id_ruta,
 					 direccion_origen_paquete, direccion_destino_paquete,
 					 dni_cliente, id_oficina)
 VALUES ('6', 'paquete6', '2024-03-02', 
-		true, 'en ruta', NULL,
+		true, 'en ruta', '3',
 		'C/ Las Xanas, Nº6, 2ºA', 'C/ Macarrón, 2, 4ºDcha',
-		'1', NULL);
+		'1', '1');
 		
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
 					 recoger_a_domicilio, estado_paquete, id_ruta,
 					 direccion_origen_paquete, direccion_destino_paquete,
 					 dni_cliente, id_oficina)
 VALUES ('7', 'paquete7', '2024-01-12', 
-		true, 'en ruta', NULL,
+		true, 'en ruta', '4',
 		'C/ San Cosme, Nº4, 5ºA', 'C/ Villaranda, 2, 4ºDcha',
-		'1', NULL);
+		'1', '1');
 		
 INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
 					 recoger_a_domicilio, estado_paquete, id_ruta,

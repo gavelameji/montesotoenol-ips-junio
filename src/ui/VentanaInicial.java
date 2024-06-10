@@ -22,6 +22,7 @@ public class VentanaInicial extends JFrame {
 	private JButton btnSolicitarEnvio;
 	private JButton btnVerEnvios;
 	private JButton btnSeguimiento;
+	private JButton btnAsignarTarifas;
 
 	/**
 	 * Launch the application.
@@ -62,6 +63,7 @@ public class VentanaInicial extends JFrame {
 		contentPane.add(getBtnVerEnvios());
 		
 		contentPane.add(getBtnSeguimiento());
+		contentPane.add(getBtnAsignarTarifas());
 	}
 
 	private JButton getBtnGenerarBD() {
@@ -158,5 +160,29 @@ public class VentanaInicial extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private void mostrarVentanaTarifas() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaTarifas frame = new VentanaTarifas();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	private JButton getBtnAsignarTarifas() {
+		if (btnAsignarTarifas == null) {
+			btnAsignarTarifas = new JButton("(HU5, HU6) Asignar Tarifas");
+			btnAsignarTarifas.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					mostrarVentanaTarifas();
+				}
+			});
+		}
+		return btnAsignarTarifas;
 	}
 }
