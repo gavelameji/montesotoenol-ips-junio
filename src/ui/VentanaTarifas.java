@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -24,6 +23,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class VentanaTarifas extends JFrame {
 
@@ -37,7 +38,7 @@ public class VentanaTarifas extends JFrame {
 	private JLabel lbDetalles;
 	private JTextArea taDetalles;
 	private JLabel lbPeso;
-	private JTextField textField;
+	private JTextField tfPeso;
 	private JButton btPeso;
 	private JLabel lbCalculo;
 	private JTextArea taPrecio;
@@ -49,6 +50,7 @@ public class VentanaTarifas extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaTarifas() {
+		setResizable(false);
 		tc = new TarifasController();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -65,7 +67,7 @@ public class VentanaTarifas extends JFrame {
 		contentPane.add(getLbDetalles());
 		contentPane.add(getTaDetalles());
 		contentPane.add(getLbPeso());
-		contentPane.add(getTextField());
+		contentPane.add(getTfPeso());
 		contentPane.add(getBtPeso());
 		contentPane.add(getLbCalculo());
 		contentPane.add(getTaPrecio());
@@ -114,10 +116,12 @@ public class VentanaTarifas extends JFrame {
 	private JList<PaqueteDTO> getList() {
 		if (list == null) {
 			list = new JList<PaqueteDTO>();
+			list.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 			list.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
 					if(list.getSelectedValue() != null) {
 						getTaDetalles().setText(tc.getInfoPaquete(list.getSelectedValue()));
+						resetearCampos();
 					}
 				}
 			});
@@ -134,6 +138,7 @@ public class VentanaTarifas extends JFrame {
 	private JTextArea getTaDetalles() {
 		if (taDetalles == null) {
 			taDetalles = new JTextArea();
+			taDetalles.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 			taDetalles.setText("Descripción:\r\nFecha De Emisión:\r\nDirección De Recogida:\r\nDirección Destino:\r\nCliente:\r\nTeléfono: ");
 			taDetalles.setEditable(false);
 			taDetalles.setBounds(413, 65, 427, 148);
@@ -147,19 +152,20 @@ public class VentanaTarifas extends JFrame {
 		}
 		return lbPeso;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(536, 232, 184, 20);
-			textField.setColumns(10);
+	private JTextField getTfPeso() {
+		if (tfPeso == null) {
+			tfPeso = new JTextField();
+			tfPeso.setBounds(536, 232, 184, 20);
+			tfPeso.setColumns(10);
 		}
-		return textField;
+		return tfPeso;
 	}
 	private JButton getBtPeso() {
 		if (btPeso == null) {
 			btPeso = new JButton("Introducir");
 			btPeso.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					introducirPeso();
 				}
 			});
 			btPeso.setBounds(730, 231, 110, 23);
@@ -176,8 +182,8 @@ public class VentanaTarifas extends JFrame {
 	private JTextArea getTaPrecio() {
 		if (taPrecio == null) {
 			taPrecio = new JTextArea();
+			taPrecio.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 			taPrecio.setEditable(false);
-			taPrecio.setText("Tipo:\r\nDistancia Ruta:\r\nPeso Producto:\r\nPrecio Base;\r\nTarifa Aplicada:\r\nPrecio Final:");
 			taPrecio.setBounds(413, 285, 427, 123);
 		}
 		return taPrecio;
@@ -202,8 +208,36 @@ public class VentanaTarifas extends JFrame {
 	private JButton getBtnAsignar() {
 		if (btnAsignar == null) {
 			btnAsignar = new JButton("Asignar Precio Final");
+			btnAsignar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					grabar();
+				}
+			});
 			btnAsignar.setBounds(688, 451, 152, 23);
 		}
 		return btnAsignar;
+	}
+	
+	private void introducirPeso() {
+		PaqueteDTO p = getList().getSelectedValue();
+		float peso = Float.parseFloat(getTfPeso().getText());
+		tc.introducirPeso(p, peso);
+		getTaPrecio().setText(tc.getInfoTarifa());
+	}
+	
+	private void grabar() {
+		int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea grabar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+	    if (respuesta == JOptionPane.YES_OPTION) {
+	        tc.grabar();
+	        JOptionPane.showMessageDialog(null, "El paquete se ha grabado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+	    } else {
+	        JOptionPane.showMessageDialog(null, "La operación de grabar ha sido cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+	    }
+	}
+	
+	private void resetearCampos() {
+		getTfPeso().setText("");
+		getTaPrecio().setText("");
 	}
 }

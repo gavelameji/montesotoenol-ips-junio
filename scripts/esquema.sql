@@ -50,6 +50,8 @@ CREATE TABLE paquete(
     direccion_origen_paquete VARCHAR(100),
     direccion_destino_paquete VARCHAR(100),
     estado_paquete VARCHAR(15),
+    peso_paquete FLOAT,
+    precio_final_paquete FLOAT,
     id_ruta VARCHAR(8),
     dni_cliente VARCHAR(8),
     id_oficina VARCHAR(8),

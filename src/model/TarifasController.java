@@ -13,9 +13,7 @@ import model.dto.PaqueteDTO;
 public class TarifasController {
 	
 	private List<OficinaDTO> oficinas;
-	
-	private float precioFinal;
-	private static final float PRECIO_BASE = 5.0f;
+	AplicarPesoPrecio app;
 	
 	public TarifasController() {
 		oficinas = CrudOficinas.obtenerOficinas();
@@ -29,13 +27,11 @@ public class TarifasController {
 		return CrudPaquetes.obtenerPaquetesEnRutaPorIdDeOficina(idOficina);
 	}
 	
-	public float getPrecioFinal() {
-		return precioFinal;
-	}
-	
-	public void calcularPrecioFinal(float distancia, float peso) {
-	    float tarifa = ((distancia + peso) / 2) * 0.2f;
-	    precioFinal = PRECIO_BASE + tarifa;
+	public void introducirPeso(PaqueteDTO p, float peso) {
+		
+		app = new AplicarPesoPrecio(p, peso);
+		app.calcularPrecioFinal();
+		
 	}
 	
 	public String getInfoPaquete(PaqueteDTO p) {
@@ -51,6 +47,17 @@ public class TarifasController {
 		sb.append("Cliente: " + c.getNombre() + ", " + c.getDni()).append("\n");
 		sb.append("Teléfono: ").append(c.getTelefono()).append("\n");
 		return sb.toString();
+	}
+	
+	public void grabar() {
+		if(app == null) return;
+		app.grabarPeso();
+		app.grabarPrecioFinal();
+	}
+	
+	public String getInfoTarifa() {
+		if(app == null) return "Nada que mostrar.";
+		return app.mostrarInfo();
 	}
 
 }

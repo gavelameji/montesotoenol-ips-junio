@@ -13,8 +13,6 @@ import model.dto.PaqueteDTO;
 public class CrudPaquetes {
 
 	private final static String DBURL = "jdbc:hsqldb:file:data/basedatos;shutdown=true";
-	// private final static String DBURL = "jdbc:hsqldb:mem:testdb"; // Base de
-	// datos en memoria
 	private final static String DBUSER = "SA";
 	private final static String DBPW = "";
 
@@ -73,6 +71,53 @@ public class CrudPaquetes {
 	    }
 	    return paquetes;
 	}
+	
+	public static void actualizarPesoPaquete(String idPaquete, float nuevoPeso) {
+	    String updateSql = "UPDATE paquete SET peso_paquete = ? WHERE id_paquete = ?";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+
+	        // Configurar los parámetros de la sentencia de actualización
+	        updateStatement.setFloat(1, nuevoPeso);
+	        updateStatement.setString(2, idPaquete);
+
+	        // Ejecutar la actualización
+	        int rowsUpdated = updateStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	            System.out.println("Peso del paquete actualizado correctamente.");
+	        } else {
+	            System.out.println("No se encontró un paquete con el ID proporcionado.");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static void actualizarPrecioPaquete(String idPaquete, float precioFinal) {
+	    String updateSql = "UPDATE paquete SET precio_final_paquete = ? WHERE id_paquete = ?";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+
+	        // Configurar los parámetros de la sentencia de actualización
+	        updateStatement.setFloat(1, precioFinal);
+	        updateStatement.setString(2, idPaquete);
+
+	        // Ejecutar la actualización
+	        int rowsUpdated = updateStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	            System.out.println("Precio del paquete actualizado correctamente.");
+	        } else {
+	            System.out.println("No se encontró un paquete con el ID proporcionado.");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 	
 	public static List<PaqueteDTO> obtenerPaquetesEnRutaPorIdDeOficina(String idOficina) {
 	    String sql = "SELECT * FROM paquete WHERE "
