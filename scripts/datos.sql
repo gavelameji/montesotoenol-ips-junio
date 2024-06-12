@@ -120,7 +120,39 @@ VALUES ('8', 'paquete8', '2024-05-04',
 		FALSE, 'recibido', NULL,
 		'C/ Fernando Alonso, 33, 14ºA', 'C/ Mar Azul, s/n',
 		'1', NULL);
+
+
+VALUES ('9', 'paquete9', '2024-06-01', 
+		true, 'pendiente', null,
+		'C/ Los Arrudos, Nº3, 1ºD', 'C/ Buenavista, 2, 4ºDcha',
+		'2', '1');
 		
+INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
+					 recoger_a_domicilio, estado_paquete, id_ruta,
+					 direccion_origen_paquete, direccion_destino_paquete,
+					 dni_cliente, id_oficina)
+VALUES ('10', 'paquete10', '2024-03-02', 
+		true, 'pendiente', null,
+		'C/ Mirasol, Nº6, 2ºA', 'C/ Paraiso, 2, 4ºDcha',
+		'2', '1');
+		
+INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
+					 recoger_a_domicilio, estado_paquete, id_ruta,
+					 direccion_origen_paquete, direccion_destino_paquete,
+					 dni_cliente, id_oficina)
+VALUES ('11', 'paquete11', '2024-01-12', 
+		true, 'pendiente', null,
+		'C/ Paraíso, Nº4, 5ºA', 'C/ Mirasol, 2, 4ºDcha',
+		'2', '1');
+		
+INSERT INTO paquete (id_paquete, descripcion_paquete, fecha_emision_paquete, 
+					 recoger_a_domicilio, estado_paquete, id_ruta,
+					 direccion_origen_paquete, direccion_destino_paquete,
+					 dni_cliente, id_oficina)
+VALUES ('12', 'paquete12', '2024-05-04', 
+		true, 'pendiente', NULL,
+		'C/ Wall Street, 33, 14ºA', 'C/ Las Rozas, s/n',
+		'2', NULL);
 		
 -- Localizadores
 

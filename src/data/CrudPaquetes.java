@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import model.dto.PaqueteDTO;
 
 public class CrudPaquetes {
@@ -86,9 +88,32 @@ public class CrudPaquetes {
 	        int rowsUpdated = updateStatement.executeUpdate();
 
 	        if (rowsUpdated > 0) {
-	            System.out.println("Peso del paquete actualizado correctamente.");
+	        	JOptionPane.showMessageDialog(null, "El peso se ha actualizado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
 	        } else {
-	            System.out.println("No se encontró un paquete con el ID proporcionado.");
+	        	JOptionPane.showMessageDialog(null, "No se pudo actualizar el peso.", "Info", JOptionPane.ERROR_MESSAGE);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static void actualizarEstadoPaquete(String idPaquete, String estado) {
+	    String updateSql = "UPDATE paquete SET estado_paquete = ? WHERE id_paquete = ?";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+
+	        // Configurar los parámetros de la sentencia de actualización
+	        updateStatement.setString(1, estado);
+	        updateStatement.setString(2, idPaquete);
+
+	        // Ejecutar la actualización
+	        int rowsUpdated = updateStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	        	JOptionPane.showMessageDialog(null, "El estado se ha actualizado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+	        } else {
+	        	JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado.", "Info", JOptionPane.ERROR_MESSAGE);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -227,4 +252,39 @@ public class CrudPaquetes {
             }
         }
 	}
+	
+	public static List<PaqueteDTO> obtenerPaquetesPendientesDeRecogida() {
+	    String sql = "SELECT * FROM paquete WHERE "
+	    		+ "estado_paquete = 'pendiente' AND recoger_a_domicilio = true "
+	    		+ "ORDER BY fecha_emision_paquete";
+	    List<PaqueteDTO> paquetes = new ArrayList<>();
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	    	
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            PaqueteDTO paquete = new PaqueteDTO(
+	                resultSet.getString("id_paquete"),
+	                resultSet.getString("descripcion_paquete"),
+	                resultSet.getDate("fecha_emision_paquete"),
+	                resultSet.getString("estado_paquete"),
+	                resultSet.getString("direccion_origen_paquete"),
+	                resultSet.getString("direccion_destino_paquete"),
+	                resultSet.getBoolean("recoger_a_domicilio"),
+	                resultSet.getString("dni_cliente"),
+	                resultSet.getString("id_ruta"),
+	                resultSet.getString("id_oficina")
+	            );
+	            paquetes.add(paquete);
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return paquetes;
+	}
+	
+	
 }

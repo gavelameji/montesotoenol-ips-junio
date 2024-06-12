@@ -23,6 +23,7 @@ public class VentanaInicial extends JFrame {
 	private JButton btnVerEnvios;
 	private JButton btnSeguimiento;
 	private JButton btnAsignarTarifas;
+	private JButton btnTransportista;
 
 	/**
 	 * Launch the application.
@@ -52,7 +53,7 @@ public class VentanaInicial extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(8, 1, 0, 0));
+		contentPane.setLayout(new GridLayout(7, 1, 0, 0));
 		
 		contentPane.add(getBtnGenerarBD());
 		
@@ -64,6 +65,7 @@ public class VentanaInicial extends JFrame {
 		
 		contentPane.add(getBtnSeguimiento());
 		contentPane.add(getBtnAsignarTarifas());
+		contentPane.add(getBtnTransportista());
 	}
 
 	private JButton getBtnGenerarBD() {
@@ -184,5 +186,29 @@ public class VentanaInicial extends JFrame {
 			});
 		}
 		return btnAsignarTarifas;
+	}
+	private JButton getBtnTransportista() {
+		if (btnTransportista == null) {
+			btnTransportista = new JButton("(HU7, HU8) Panel De Transportista");
+			btnTransportista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					mostrarVentanaTransportista();
+				}
+			});
+		}
+		return btnTransportista;
+	}
+	
+	private void mostrarVentanaTransportista() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaTransportista frame = new VentanaTransportista();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
