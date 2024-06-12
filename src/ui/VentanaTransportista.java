@@ -46,6 +46,7 @@ public class VentanaTransportista extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaTransportista() {
+		setResizable(false);
 		
 		rc = new RecogidasController();
 		

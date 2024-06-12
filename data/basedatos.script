@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 32119
+SET FILES CHECK 33326
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -70,7 +70,7 @@ INSERT INTO RUTA VALUES('4','C/ San Cosme, N\u00ba4, 5\u00baA','C/ Villaranda, 2
 INSERT INTO PAQUETE VALUES('1','paquete1',TRUE,'2024-06-01','C/ Moreno, N\u00ba22, 1\u00baA','C/ Ibias, 1, 2\u00baDcha','pendiente',NULL,NULL,NULL,'1',NULL)
 INSERT INTO PAQUETE VALUES('10','paquete10',TRUE,'2024-03-02','C/ Mirasol, N\u00ba6, 2\u00baA','C/ Paraiso, 2, 4\u00baDcha','en ruta',NULL,NULL,NULL,'2','1')
 INSERT INTO PAQUETE VALUES('11','paquete11',TRUE,'2024-01-12','C/ Para\u00edso, N\u00ba4, 5\u00baA','C/ Mirasol, 2, 4\u00baDcha','pendiente',NULL,NULL,NULL,'2','1')
-INSERT INTO PAQUETE VALUES('12','paquete12',TRUE,'2024-05-04','C/ Wall Street, 33, 14\u00baA','C/ Las Rozas, s/n','en ruta',NULL,NULL,NULL,'2',NULL)
+INSERT INTO PAQUETE VALUES('12','paquete12',TRUE,'2024-05-04','C/ Wall Street, 33, 14\u00baA','C/ Las Rozas, s/n','pendiente',NULL,NULL,NULL,'2',NULL)
 INSERT INTO PAQUETE VALUES('2','paquete2',TRUE,'2024-06-03','C/ Vicente S\u00e1nchez, N\u00ba23, 1\u00baA','C/ Moreda, 11, 2\u00baA','recibido',NULL,NULL,NULL,'2',NULL)
 INSERT INTO PAQUETE VALUES('3','paquete3',TRUE,'2024-06-02','C/ Moreno, N\u00ba22, 1\u00baA','C/ San Chicho, 2, 4\u00baDcha','en ruta',NULL,NULL,NULL,'1',NULL)
 INSERT INTO PAQUETE VALUES('4','paquete4',TRUE,'2024-06-02','C/ Ruta Del Alba, N\u00ba3, 1\u00baC','C/ Las Vegas, 2, 4\u00baDcha','en ruta',NULL,NULL,'1','1','1')
