@@ -142,6 +142,29 @@ public class CrudPaquetes {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public static void incrementarNumeroDeBloqueosPaquete(String idPaquete, int numero) {
+	    String updateSql = "UPDATE paquete SET veces_bloqueado = ? WHERE id_paquete = ?";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+
+	        // Configurar los parámetros de la sentencia de actualización
+	        updateStatement.setFloat(1, numero);
+	        updateStatement.setString(2, idPaquete);
+
+	        // Ejecutar la actualización
+	        int rowsUpdated = updateStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	            System.out.println("Información actualizada correctamente.");
+	        } else {
+	            System.out.println("No se encontró un paquete con el ID proporcionado.");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	
 	public static List<PaqueteDTO> obtenerPaquetesEnRutaPorIdDeOficina(String idOficina) {
@@ -256,6 +279,39 @@ public class CrudPaquetes {
 	public static List<PaqueteDTO> obtenerPaquetesPendientesDeRecogida() {
 	    String sql = "SELECT * FROM paquete WHERE "
 	    		+ "estado_paquete = 'pendiente' AND recoger_a_domicilio = true "
+	    		+ "ORDER BY fecha_emision_paquete";
+	    List<PaqueteDTO> paquetes = new ArrayList<>();
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	    	
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            PaqueteDTO paquete = new PaqueteDTO(
+	                resultSet.getString("id_paquete"),
+	                resultSet.getString("descripcion_paquete"),
+	                resultSet.getDate("fecha_emision_paquete"),
+	                resultSet.getString("estado_paquete"),
+	                resultSet.getString("direccion_origen_paquete"),
+	                resultSet.getString("direccion_destino_paquete"),
+	                resultSet.getBoolean("recoger_a_domicilio"),
+	                resultSet.getString("dni_cliente"),
+	                resultSet.getString("id_ruta"),
+	                resultSet.getString("id_oficina")
+	            );
+	            paquetes.add(paquete);
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return paquetes;
+	}
+	
+	public static List<PaqueteDTO> obtenerPaquetesParaEntregar() {
+	    String sql = "SELECT * FROM paquete WHERE "
+	    		+ "estado_paquete = 'en ruta' or estado_paquete = 'bloqueado' "
 	    		+ "ORDER BY fecha_emision_paquete";
 	    List<PaqueteDTO> paquetes = new ArrayList<>();
 

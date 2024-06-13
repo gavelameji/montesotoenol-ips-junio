@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.dto.OficinaDTO;
 
 public class CrudOficinas {
@@ -38,6 +37,30 @@ public class CrudOficinas {
 		}
 
 		return oficinas;
+	}
+
+	public static OficinaDTO obtenerOficinaPorId(String idOficina) {
+		String sql = "SELECT * FROM oficina WHERE id_oficina = ?";
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setString(1, idOficina);
+	        ResultSet resultSet = statement.executeQuery();
+	        
+	        if(resultSet.next()) {
+	        	OficinaDTO oficina = new OficinaDTO(
+	                resultSet.getString("id_cliente"),
+	                resultSet.getString("ciudad_cliente"),
+	                resultSet.getString("direccion_oficina")
+	            );
+	            return oficina;
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 
 }

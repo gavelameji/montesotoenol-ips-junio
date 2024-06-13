@@ -55,6 +55,7 @@ CREATE TABLE paquete(
     id_ruta VARCHAR(8),
     dni_cliente VARCHAR(8),
     id_oficina VARCHAR(8),
+    veces_bloqueado INT DEFAULT 0,
     CONSTRAINT pk_paquete PRIMARY KEY (id_paquete),
     CONSTRAINT fk_paquete_ruta FOREIGN KEY (id_ruta) REFERENCES ruta (id_ruta),
     CONSTRAINT fk_paquete_cliente FOREIGN KEY (dni_cliente) REFERENCES cliente (dni_cliente),

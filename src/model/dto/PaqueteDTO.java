@@ -19,6 +19,7 @@ public class PaqueteDTO {
 	
 	private float peso;
 	private float precioFinal;
+	private int vecesBloqueado;
 	
 	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
 			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina) {
@@ -102,12 +103,15 @@ public class PaqueteDTO {
 		return precioFinal;
 	}
 
-
+	public int getVecesBloqueado() {
+		return vecesBloqueado;
+	}
 
 	@Override
 	public String toString() {
 		return id + " - " + descripcion + " - " + fechaEmision;
 	}
+
 	
 	
 	
