@@ -370,7 +370,7 @@ public class VentanaSolicitarEnvio extends JFrame {
 		}
 		
 		return new PaqueteDTO(UUID.randomUUID().toString(), descripcion, Date.valueOf(LocalDate.now()),
-				"pendiente", direccionOrigen, direccionDestino, recogidaADomicilio, dni, null, idOficina);
+				"pendiente", direccionOrigen, direccionDestino, recogidaADomicilio, dni, null, idOficina, 0);
 	}
 	
 	private void registrar() {

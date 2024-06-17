@@ -5,7 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import data.CrudOficinas;
+import data.CrudPaquetes;
 import model.PaqueteController;
+import model.dto.OficinaDTO;
 import model.dto.PaqueteDTO;
 
 import java.awt.BorderLayout;
@@ -15,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -126,6 +130,7 @@ public class VentanaVerEnvios extends JFrame {
 	private void buscar() {
 		verificarCampo();
 		this.dni = getTfDni().getText().trim();
+		avisarEntregasBloqueadas(dni);
 		actualizarTabla();
 	}
 	
@@ -150,5 +155,20 @@ public class VentanaVerEnvios extends JFrame {
 					"Formato no válido", "Error", JOptionPane.ERROR_MESSAGE);
 			getTfDni().setText("");
 		}
+	}
+	
+	private void avisarEntregasBloqueadas(String dni) {
+		List<PaqueteDTO> entregasBloqueadas = CrudPaquetes.obtenerPaquetesEnOficina(dni);
+		if(entregasBloqueadas.size() == 0)
+			return;
+		StringBuilder sb = new StringBuilder();
+		OficinaDTO o;
+		for(PaqueteDTO p: entregasBloqueadas) {
+			o = CrudOficinas.obtenerOficinaPorId(p.getIdOficina());
+			sb.append(p).append(" en oficina ").append(o).append("\n");
+		}
+		JOptionPane.showMessageDialog(this, 
+				"Los siguientes paquetes no han podido ser entregados y deben ser recogidos"
+				+ " en oficina:\n" + sb.toString(), "Info", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

@@ -50,8 +50,8 @@ public class CrudOficinas {
 	        
 	        if(resultSet.next()) {
 	        	OficinaDTO oficina = new OficinaDTO(
-	                resultSet.getString("id_cliente"),
-	                resultSet.getString("ciudad_cliente"),
+	                resultSet.getString("id_oficina"),
+	                resultSet.getString("ciudad_oficina"),
 	                resultSet.getString("direccion_oficina")
 	            );
 	            return oficina;

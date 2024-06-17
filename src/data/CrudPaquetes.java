@@ -31,7 +31,7 @@ public class CrudPaquetes {
 						resultSet.getDate("fecha_emision_paquete"), resultSet.getString("estado_paquete"),
 						resultSet.getString("direccion_origen_paquete"), resultSet.getString("direccion_destino_paquete"),
 						resultSet.getBoolean("recoger_a_domicilio"), resultSet.getString("dni_cliente"),
-						resultSet.getString("id_ruta"), resultSet.getString("id_oficina"));
+						resultSet.getString("id_ruta"), resultSet.getString("id_oficina"), resultSet.getInt("veces_bloqueado"));
 
 				paquetes.add(paquete);
 			}
@@ -63,7 +63,8 @@ public class CrudPaquetes {
 	                resultSet.getBoolean("recoger_a_domicilio"),
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
-	                resultSet.getString("id_oficina")
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
 	            );
 	            paquetes.add(paquete);
 	        }
@@ -190,7 +191,8 @@ public class CrudPaquetes {
 	                resultSet.getBoolean("recoger_a_domicilio"),
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
-	                resultSet.getString("id_oficina")
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
 	            );
 	            paquetes.add(paquete);
 	        }
@@ -222,7 +224,8 @@ public class CrudPaquetes {
 	                resultSet.getBoolean("recoger_a_domicilio"),
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
-	                resultSet.getString("id_oficina")
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
 	            );
 	            return paquete;
 	        }
@@ -298,7 +301,8 @@ public class CrudPaquetes {
 	                resultSet.getBoolean("recoger_a_domicilio"),
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
-	                resultSet.getString("id_oficina")
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
 	            );
 	            paquetes.add(paquete);
 	        }
@@ -331,7 +335,41 @@ public class CrudPaquetes {
 	                resultSet.getBoolean("recoger_a_domicilio"),
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
-	                resultSet.getString("id_oficina")
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
+	            );
+	            paquetes.add(paquete);
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return paquetes;
+	}
+	
+	public static List<PaqueteDTO> obtenerPaquetesEnOficina(String dniCliente) {
+	    String sql = "SELECT * FROM paquete WHERE veces_bloqueado >= 3 and dni_cliente = ?";
+	    List<PaqueteDTO> paquetes = new ArrayList<>();
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	    	
+	    	statement.setString(1, dniCliente);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            PaqueteDTO paquete = new PaqueteDTO(
+	                resultSet.getString("id_paquete"),
+	                resultSet.getString("descripcion_paquete"),
+	                resultSet.getDate("fecha_emision_paquete"),
+	                resultSet.getString("estado_paquete"),
+	                resultSet.getString("direccion_origen_paquete"),
+	                resultSet.getString("direccion_destino_paquete"),
+	                resultSet.getBoolean("recoger_a_domicilio"),
+	                resultSet.getString("dni_cliente"),
+	                resultSet.getString("id_ruta"),
+	                resultSet.getString("id_oficina"),
+	                resultSet.getInt("veces_bloqueado")
 	            );
 	            paquetes.add(paquete);
 	        }

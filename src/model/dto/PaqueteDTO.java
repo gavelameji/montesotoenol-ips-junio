@@ -22,7 +22,7 @@ public class PaqueteDTO {
 	private int vecesBloqueado;
 	
 	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
-			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina) {
+			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina, int vecesBloqueado) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -34,13 +34,14 @@ public class PaqueteDTO {
 		this.dniCliente = dniCliente;
 		this.idRuta = idRuta;
 		this.idOficina = idOficina;
+		this.vecesBloqueado = vecesBloqueado;
 	}
 	
 	
 
 	public PaqueteDTO(String id, String descripcion, Date fechaEmision, String estado, String direccionOrigen,
 			String direccionDestino, boolean recogerADomicilio, String dniCliente, String idRuta, String idOficina,
-			String idLocalizador, float peso, float precioFinal) {
+			String idLocalizador, float peso, float precioFinal, int vecesBloqueado) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaEmision = fechaEmision;
@@ -54,6 +55,7 @@ public class PaqueteDTO {
 		this.idLocalizador = idLocalizador;
 		this.peso = peso;
 		this.precioFinal = precioFinal;
+		this.vecesBloqueado = vecesBloqueado;
 	}
 
 
