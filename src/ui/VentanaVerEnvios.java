@@ -165,7 +165,7 @@ public class VentanaVerEnvios extends JFrame {
 		OficinaDTO o;
 		for(PaqueteDTO p: entregasBloqueadas) {
 			o = CrudOficinas.obtenerOficinaPorId(p.getIdOficina());
-			sb.append(p).append(" en oficina ").append(o).append("\n");
+			sb.append(p).append(" en oficina ").append(o.getDireccion() + ", " + o.getCiudad()).append("\n");
 		}
 		JOptionPane.showMessageDialog(this, 
 				"Los siguientes paquetes no han podido ser entregados y deben ser recogidos"
