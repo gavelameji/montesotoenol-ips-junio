@@ -22,7 +22,9 @@ public class AplicarPesoPrecio {
 	
 	public void calcularPrecioFinal() {
 	    tarifa = ((distancia + peso) / 2) * 0.2f;
+	    tarifa = (float) (Math.floor(tarifa * 100) / 100.0);
 	    precioFinal = PRECIO_BASE + tarifa;
+	    precioFinal = (float) (Math.floor(precioFinal * 100) / 100.0);
 	}
 	
 	public void grabarPeso() {

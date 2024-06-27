@@ -58,8 +58,6 @@ public class PaqueteDTO {
 		this.vecesBloqueado = vecesBloqueado;
 	}
 
-
-
 	public String getId() {
 		return id;
 	}

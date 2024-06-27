@@ -75,6 +75,41 @@ public class CrudPaquetes {
 	    return paquetes;
 	}
 	
+	public static List<PaqueteDTO> obtenerPaquetes2() {
+	    String sql = "SELECT * FROM paquete";
+	    List<PaqueteDTO> paquetes = new ArrayList<>();
+
+	    try (Connection connection = DriverManager.getConnection(DBURL, DBUSER, DBPW);
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            PaqueteDTO paquete = new PaqueteDTO(
+	                resultSet.getString("id_paquete"),
+	                resultSet.getString("descripcion_paquete"),
+	                resultSet.getDate("fecha_emision_paquete"),
+	                resultSet.getString("estado_paquete"),
+	                resultSet.getString("direccion_origen_paquete"),
+	                resultSet.getString("direccion_destino_paquete"),
+	                resultSet.getBoolean("recoger_a_domicilio"),
+	                resultSet.getString("dni_cliente"),
+	                resultSet.getString("id_ruta"),
+	                resultSet.getString("id_oficina"),
+	                resultSet.getString("id_localizador"),
+	                resultSet.getFloat("peso_paquete"),
+	                resultSet.getFloat("precio_final_paquete"),
+	                resultSet.getInt("veces_bloqueado")
+	            );
+	            paquetes.add(paquete);
+	        }
+	        resultSet.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return paquetes;
+	}
+	
 	public static void actualizarPesoPaquete(String idPaquete, float nuevoPeso) {
 	    String updateSql = "UPDATE paquete SET peso_paquete = ? WHERE id_paquete = ?";
 
@@ -225,6 +260,9 @@ public class CrudPaquetes {
 	                resultSet.getString("dni_cliente"),
 	                resultSet.getString("id_ruta"),
 	                resultSet.getString("id_oficina"),
+	                resultSet.getString("id_localizador"),
+	                resultSet.getFloat("peso_paquete"),
+	                resultSet.getFloat("precio_final_paquete"),
 	                resultSet.getInt("veces_bloqueado")
 	            );
 	            return paquete;

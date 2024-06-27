@@ -51,7 +51,7 @@ public class Localizador {
 		sb.append("Fecha Emision: ").append(paquete.getFechaEmision()).append("\n");
 		sb.append("Dirección Origen: ").append(paquete.getDireccionDestino()).append("\n");
 		sb.append("Dirección Destino: ").append(paquete.getDireccionOrigen()).append("\n");
-		sb.append("Peso: ").append(paquete.getPeso()).append(" Precio: ").append(paquete.getPrecioFinal());
+		sb.append("Peso (kg): ").append(paquete.getPeso()).append(" Precio (€): ").append(paquete.getPrecioFinal());
 		return sb.toString();
 	}
 	

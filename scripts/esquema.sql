@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS cliente;
 
 -- Cliente
 CREATE TABLE cliente(
-    dni_cliente VARCHAR(8),
+    dni_cliente VARCHAR(9),
     nombre_cliente VARCHAR(100) NOT NULL,
     direccion_cliente VARCHAR(100) NOT NULL,
     telefono_cliente VARCHAR(9),
@@ -53,7 +53,7 @@ CREATE TABLE paquete(
     peso_paquete FLOAT,
     precio_final_paquete FLOAT,
     id_ruta VARCHAR(8),
-    dni_cliente VARCHAR(8),
+    dni_cliente VARCHAR(9),
     id_oficina VARCHAR(8),
     veces_bloqueado INT DEFAULT 0,
     CONSTRAINT pk_paquete PRIMARY KEY (id_paquete),
